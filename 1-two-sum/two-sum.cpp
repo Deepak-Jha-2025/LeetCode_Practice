@@ -19,7 +19,8 @@ public:
 
         // Better Solution
         int n = nums.size();
-        map<int, int> mpp;
+        // map<int, int> mpp;
+        unordered_map<int, int> mpp; // Saves time (refer STL by LUV source code, on github)
 
         for(int i=0; i<n; i++) {
             int a = nums[i];
