@@ -31,8 +31,8 @@ public:
             }
 
             // mpp[a] = i;
-            mpp.insert(make_pair(a, i));
-            // mpp.insert({a, i});
+            // mpp.insert(make_pair(a, i));
+            mpp.insert({a, i});
         }
 
         return {-1, -1};
