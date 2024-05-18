@@ -23,10 +23,12 @@ public:
         }
 
         // Iterate in the map and find the majority element
-        map<int, int> ::iterator it;
-        for(it = mpp.begin(); it != mpp.end(); it++) {
-            if(it->second > n/2) {
-                return it->first;
+        // for(auto it = mpp.begin(); it != mpp.end(); it++) {
+        for(auto pr : mpp) {
+            // if(it->second > n/2) {
+            if(pr.second > n/2) {
+                return pr.first;
+                // return it->first;
             }
         }
         return -1;
