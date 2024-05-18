@@ -13,8 +13,8 @@ public:
 
             auto it = mpp.find(nums[i]);
             if(it == mpp.end()) {
-                mpp[nums[i]] = 1;
-                // mpp.insert({num[i], 1});
+                // mpp[nums[i]] = 1;
+                mpp.insert({nums[i], 1});
                 // mpp[nums[i]] = mpp[nums[i]] + 1; // This handles both if-else cases automatically
             }
             else {
@@ -23,12 +23,9 @@ public:
         }
 
         // Iterate in the map and find the majority element
-        // for(auto it = mpp.begin(); it != mpp.end(); it++) {
         for(auto pr : mpp) {
-            // if(it->second > n/2) {
             if(pr.second > n/2) {
                 return pr.first;
-                // return it->first;
             }
         }
         return -1;
