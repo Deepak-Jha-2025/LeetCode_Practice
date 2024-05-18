@@ -14,8 +14,8 @@ public:
             auto it = mpp.find(nums[i]);
             if(it == mpp.end()) {
                 // mpp[nums[i]] = 1;
-                mpp.insert({nums[i], 1});
-                // mpp[nums[i]] = mpp[nums[i]] + 1; // This handles both if-else cases automatically
+                // mpp.insert({nums[i], 1});
+                mpp[nums[i]] = mpp[nums[i]] + 1; // This handles both if-else cases automatically
             }
             else {
                 mpp[nums[i]]++;
