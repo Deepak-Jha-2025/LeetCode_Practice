@@ -4,22 +4,22 @@ public:
         // Better solution
 
         // map to store the count
-        map<int, int> mpp;
+        unordered_map<int, int> mpp;
 
-        // Iterate in the array and store the counts
+        // Iterate in the array and store the counts --> O(N*log(N))
         int n = nums.size();
         for(int i=0; i<n; i++) {
-            // mpp[nums[i]]++;
+            mpp[nums[i]]++;
 
-            auto it = mpp.find(nums[i]);
-            if(it == mpp.end()) {
-                // mpp[nums[i]] = 1;
-                // mpp.insert({nums[i], 1});
-                mpp[nums[i]] = mpp[nums[i]] + 1; // This handles both if-else cases automatically
-            }
-            else {
-                mpp[nums[i]]++;
-            }
+            // auto it = mpp.find(nums[i]);
+            // if(it == mpp.end()) {
+            //     mpp[nums[i]] = 1;
+            //     // mpp.insert({nums[i], 1});
+            //     // mpp[nums[i]] = mpp[nums[i]] + 1; // This handles both if-else cases automatically
+            // }
+            // else {
+            //     mpp[nums[i]]++;
+            // }
         }
 
         // Iterate in the map and find the majority element
