@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
+        // Optimal solution (Kadane's algo - O(n) time, O(1) space)
         int sum = 0, maxi = INT_MIN;
         int n = nums.size();
 
