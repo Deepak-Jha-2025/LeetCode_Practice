@@ -7,22 +7,24 @@ public:
         
         sort(nums.begin(), nums.end());
 
-        int len = 1;
-        int maxLen = 1;
         int n = nums.size();
+        int longest = 1;
+        int cntCurr = 0;
+        int lastSmaller = INT_MIN;
 
-        for(int i=1; i<n; i++) {
-            if(nums[i] - nums[i-1] == 1) {
-                len++;
+        for(int i=0; i<n; i++) {
+            if(nums[i] - 1 == lastSmaller) {
+                cntCurr++;
+                lastSmaller = nums[i];
             }
-            else if(nums[i] - nums[i-1] != 0) {
-                maxLen = max(maxLen, len);
-                len = 1;
+            else if(nums[i] != lastSmaller) {
+                cntCurr = 1;
+                lastSmaller = nums[i];
             }
+
+            longest = max(longest, cntCurr);
         }
 
-        maxLen = max(maxLen, len); // to check for the last possible consecutive subseq. which will not be checked by the else block (loop will terminate before that)
-
-        return maxLen;
+        return longest;
     }
 };
