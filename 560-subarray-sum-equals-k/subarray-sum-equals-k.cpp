@@ -17,9 +17,16 @@ public:
             preSum += nums[i];
             int removeSum = preSum - k;
 
-            if(preSumMap.find(removeSum) != preSumMap.end()) {
-                cnt += preSumMap[removeSum];
-            }
+
+            // if(preSumMap.find(removeSum) != preSumMap.end()) {
+            //     cnt += preSumMap[removeSum];
+            // }
+
+            cnt += preSumMap[removeSum]; // directly writing also works but it unnecessarily will store
+                                          // the removeSum in the map with a count = 0 (which will stay 
+                                          // unaltered afterwards)
+
+
 
             // auto it = preSumMap.find(preSum);
             // if(it == preSumMap.end()) {
