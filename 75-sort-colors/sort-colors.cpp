@@ -2,6 +2,8 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         // Better Solution
+        // T.C: O(2n)
+        // S.C: O(1)
 
         int cnt0 = 0;
         int cnt1 = 0;
