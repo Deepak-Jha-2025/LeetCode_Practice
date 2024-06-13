@@ -1,35 +1,22 @@
 class Solution {
 public:
     int minMovesToSeat(vector<int>& seats, vector<int>& students) {
-        // Brute force 
+        // Better Solution
+
+        // Intuition: rightmost student should take the rightmost seat and leftmost student should take the leftmost
+        // seat, as logically, it will be respectively the closest to them. Then subsequently, the 2nd leftmost and 
+        // the 2nd rightmost student should take the 2nd leftmost and 2nd right most seat respectively, and so on.
+
+        // Basically if seat positions and student positions are sorted, then optimally the nearest seat for ith
+        // student will be ith seat.
+
+        sort(seats.begin(), seats.end());
+        sort(students.begin(), students.end());
 
         int cnt = 0;
         int n = seats.size();
-        for(int j=0; j<n; j++) {
-
-            int minSeat = INT_MAX;
-            int minStudent = INT_MAX;
-
-            int minSeatIdx = -1;
-            int minStudIdx = -1;
-            
-            for(int i=0; i<n; i++) {
-
-                if(seats[i] > 0 && seats[i] < minSeat) {
-                    minSeat = seats[i];
-                    minSeatIdx = i;
-                }
-
-                if(students[i] > 0 && students[i] < minStudent) {
-                    minStudent = students[i];
-                    minStudIdx = i;
-                }
-
-            }
-
-            cnt += abs(minSeat - minStudent);
-            seats[minSeatIdx] = -1;
-            students[minStudIdx] = -1;
+        for(int i=0; i<n; i++) {
+            cnt += abs(students[i] - seats[i]);
         }
 
         return cnt;
