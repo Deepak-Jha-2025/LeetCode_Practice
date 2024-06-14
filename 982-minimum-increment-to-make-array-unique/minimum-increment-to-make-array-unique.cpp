@@ -3,6 +3,8 @@ public:
     int minIncrementForUnique(vector<int>& nums) {
         // Optimal Solution (Approach - 1) (only optimal under smaller constraints)
         // Somewhat like counting sort
+        // T.C: O(n) + O(n + k), k = maxElement <= 10^5
+        // S.C: O(1)
 
         int n = nums.size();
         int maxElement = *max_element(begin(nums), end(nums));
@@ -14,7 +16,7 @@ public:
         }
 
         int moves = 0;
-        for(int i=0; i<n + maxElement; i++) {
+        for(int i=0; i<n + maxElement - 1; i++) {
             if(count[i] <= 1) {
                 continue;
             }
