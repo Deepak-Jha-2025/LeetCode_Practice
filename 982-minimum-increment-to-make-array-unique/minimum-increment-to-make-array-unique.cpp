@@ -14,7 +14,7 @@ public:
         }
 
         int moves = 0;
-        for(int i=0; i<n + maxElement - 1; i++) {
+        for(int i=0; i<n + maxElement; i++) {
             if(count[i] <= 1) {
                 continue;
             }
