@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minIncrementForUnique(vector<int>& nums) {
-        // Better solution
+        // Better solution (Approach 1)
         // T.C: O(nlogn) + O(n)
 
         int n = nums.size();
