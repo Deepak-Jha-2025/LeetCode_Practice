@@ -1,6 +1,10 @@
 class Solution {
 public:
     bool isToeplitzMatrix(vector<vector<int>>& matrix) {
+        // Brute force
+        // T.C: near about O(n^3) (actually it's O(m*m*n) + O(m*n*n))
+        // S.C: O(1)
+
         int m = matrix.size();
         for(int i=0; i<m; i++) {
 
