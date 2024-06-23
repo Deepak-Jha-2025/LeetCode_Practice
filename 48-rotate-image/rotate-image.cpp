@@ -1,28 +1,23 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // Brute Force
-        // T.C: O(n^2)
-        // S.C: O(n^2)
+        // Optimal Solution
+        // T.C: 
+        // S.C: 
 
-        // Create an ext matrix to store each element in its desired place 
-        // and return the ans
         int n = matrix.size();
-        vector<vector<int>> ans(n, vector<int>(n));    // n x n matrix created, uninitialized
 
-        // Iterate the matrix and map the elements
+        // Step 1: Take transpose
+        for(int i=0; i<n-1; i++) {
+            for(int j=i+1; j<n; j++) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+
+        // Step 2: Reverse every row
         for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                ans[j][(n-1)-i] = matrix[i][j];
-            }
+            // Every row is a vector in itself, i.e. matrix[i] is a vector
+            reverse(matrix[i].begin(), matrix[i].end());
         }
-
-        for(int i=0; i<n; i++) { // This extra O(n^2) b/z of the return type of the function
-            for(int j=0; j<n; j++) {
-                matrix[i][j] = ans[i][j];
-            }
-        }
-
-        // matrix = ans; // shortcut for above nested loops
     }
 };
