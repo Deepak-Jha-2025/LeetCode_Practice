@@ -2,8 +2,8 @@ class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
         // Optimal Solution
-        // T.C: 
-        // S.C: 
+        // T.C: O(N(N-1)/2 + N*N/2)
+        // S.C: O(1)
 
         int n = matrix.size();
 
