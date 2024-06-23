@@ -1,6 +1,10 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        // Only solution => Optimal
+        // T.C: O(m*n)
+        // S.c: O(m*n) --> just to return the answer
+
         int m = matrix.size();
         int n = matrix[0].size();
 
