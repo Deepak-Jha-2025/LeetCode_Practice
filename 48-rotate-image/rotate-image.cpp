@@ -18,12 +18,12 @@ public:
             }
         }
 
-        // for(int i=0; i<n; i++) {
-        //     for(int j=0; j<n; j++) {
-        //         matrix[i][j] = ans[i][j];
-        //     }
-        // }
+        for(int i=0; i<n; i++) {
+            for(int j=0; j<n; j++) {
+                matrix[i][j] = ans[i][j];
+            }
+        }
 
-        matrix = ans;
+        // matrix = ans; // shortcut for above nested loops
     }
 };
