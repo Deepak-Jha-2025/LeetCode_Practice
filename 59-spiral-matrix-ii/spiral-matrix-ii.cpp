@@ -1,6 +1,11 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
+        // Simple implementation based like Spiral matrix I ques
+        // Only one sol ==> optimal solution
+
+        // T.C: O(n^2)
+        // S.C: O(n^2) --> just to store and return the ans
         int a = 1;
 
         int top = 0, bottom = n-1;
