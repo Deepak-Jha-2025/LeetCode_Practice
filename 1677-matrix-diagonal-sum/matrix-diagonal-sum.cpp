@@ -3,6 +3,8 @@ public:
     int diagonalSum(vector<vector<int>>& mat) {
         // Straight away implementation based
         // Only one solution => Optimal solution
+        // T.C: O(n)
+        // S.C: O(1)
 
         int n = mat.size();
         int diagSum = 0;
