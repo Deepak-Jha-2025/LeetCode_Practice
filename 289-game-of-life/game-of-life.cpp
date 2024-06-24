@@ -2,6 +2,8 @@ class Solution {
 public:
     void gameOfLife(vector<vector<int>>& board) {
         // Brute force
+        // T.C: O(m*n) + O(m*n)
+        // S.C: O(m*n)
 
         int m = board.size();
         int n = board[0].size();
@@ -86,6 +88,6 @@ public:
             }
         }
 
-        board = ans; // O(m*n)
+        board = ans; // O(m*n) --> only b/z of the return type of the function
     }
 };
