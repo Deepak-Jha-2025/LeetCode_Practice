@@ -3,7 +3,7 @@ public:
     vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
         // Straight forward implementation based
         // T.C: O(m*n)
-        // S.C: O(m*n) to return the ans
+        // S.C: O(m*n or original.size()) to solve + O(m*n) to return the ans
 
 
         vector<vector<int>> ans;
@@ -11,7 +11,7 @@ public:
         if(original.size() != m*n) {
             return ans;
         }
-        
+
         // 2 ptr method
         int i=0, j=0;
 
