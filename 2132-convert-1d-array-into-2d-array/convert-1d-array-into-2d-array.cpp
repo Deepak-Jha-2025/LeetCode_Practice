@@ -3,36 +3,22 @@ public:
     vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
         // Straight forward implementation based
         // T.C: O(m*n)
-        // S.C: O(m*n or original.size()) to solve + O(m*n) to return the ans
+        // S.C: O(m*n) to return the ans
 
 
-        vector<vector<int>> ans;
+        vector<vector<int>> ans(m, vector<int>(n));
 
         if(original.size() != m*n) {
-            return ans;
+            return {};
         }
 
-        // 2 ptr method
-        int i=0, j=0;
-
-        int l = original.size();
-        while(i<l && j<l) {
-            
-            j = i;
-            while((j+1) % n != 0) {
-                j++;
+        // The situation is similar to row-major mapping (refer notes)
+        // row-major mapping is how a 2d array is mapped into a 1d array in the memory
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                ans[i][j] = original[j + n*i];
             }
-
-            // The moment (j+1) % n == 0 => j+1 = k*n => j = k*n - 1, where k is the row no. in ans
-            // And the row will be from i to j
-
-            vector<int> ithRow(original.begin() + i, original.begin() + (j+1));
-
-            ans.push_back(ithRow);
-
-            i = j+1;
         }
-
 
         return ans;
     }
