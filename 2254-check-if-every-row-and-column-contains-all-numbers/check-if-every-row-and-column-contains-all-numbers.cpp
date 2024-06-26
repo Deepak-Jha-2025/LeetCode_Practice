@@ -2,6 +2,9 @@ class Solution {
 public:
     bool checkValid(vector<vector<int>>& matrix) {
         // Brute force - using bitmask array
+        // T.C: O(n) + O(n*3n) + O(n*3n)
+        // S.C: O(n)
+
         int n = matrix.size();
         vector<int> bitmask(n+1, 0); // O(n)
 
