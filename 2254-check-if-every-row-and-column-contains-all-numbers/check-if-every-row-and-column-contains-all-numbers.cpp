@@ -2,48 +2,54 @@ class Solution {
 public:
     bool checkValid(vector<vector<int>>& matrix) {
         // Brute force - using bitmask array
-        // T.C: O(n) + O(n*3n) + O(n*3n)
+        // T.C: O(n*2n) + O(n*2n)
         // S.C: O(n)
 
         int n = matrix.size();
-        vector<int> bitmask(n+1, 0); // O(n)
+        unordered_set<int> s;
 
-        // Checking along all rows --> O(n*(3n))
-        for(int i=0; i<n; i++) {
-            // O(n)
-            for(int j=0; j<n; j++) {
-                bitmask[matrix[i][j]] = 1; // mark its presence
+        // Checking along all rows --> O(n*(2n))
+        for (int i = 0; i < n; i++) {
+            // O(n) * O(1), for best n avg case of set
+            for (int j = 0; j < n; j++) {
+                s.insert(matrix[i][j]); // would store all unique ele of a row
             }
 
-            // Iterate in the bitmask to see if all elements from 1 to n where present in the row
-            // O(n)
-            for(int k=1; k<=n; k++) {
-                if(bitmask[k] == 0) {
-                    return false;
-                }
+            // Now, as all unique ele were stored in the set for a row
+            // So, if no ele from 1 to n is missing, then it means size of set
+            // must be n vice versa also true
+
+            // O(1)
+            if (s.size() != n) {
+                return false;
             }
 
-            // Check for current row done, reset the bitmask to use for next row = O(n)
-            fill(bitmask.begin(), bitmask.end(), 0); // or simply use loop
+            // O(n), n = size of set = n in worst case if all elements in row
+            // are unique (from 1 to n)
+            s.clear(); // Check for this row done, so empty the set to use it
+                       // for next row
         }
 
-        // Checking along all cols --> O(n*(3n))
-        for(int j=0; j<n; j++) {
-            // O(n)
-            for(int i=0; i<n; i++) {
-                bitmask[matrix[i][j]] = 1; // mark its presence
+        // Checking along all cols --> O(n*(2n))
+        for (int j = 0; j < n; j++) {
+            // O(n) * O(1), for best n avg case of set
+            for (int i = 0; i < n; i++) {
+                s.insert(matrix[i][j]); // would store all unique ele of a row
             }
 
-            // Iterate in the bitmask to see if all elements from 1 to n where present in the row
-            // O(n)
-            for(int k=1; k<=n; k++) {
-                if(bitmask[k] == 0) {
-                    return false;
-                }
+            // Now, as all unique ele were stored in the set for a row
+            // So, if no ele from 1 to n is missing, then it means size of set
+            // must be n vice versa also true
+
+            // O(1)
+            if (s.size() != n) {
+                return false;
             }
 
-            // Check for current row done, reset the bitmask to use for next row = O(n)
-            fill(bitmask.begin(), bitmask.end(), 0); // or simply use loop
+            // O(n), n = size of set = n in worst case if all elements in row
+            // are unique (from 1 to n)
+            s.clear(); // Check for this row done, so empty the set to use it
+                       // for next row
         }
 
         return true;
