@@ -19,6 +19,8 @@ public:
 
     vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) {
         // Brute force
+        // T.C: O(n * n/2) + O(n^2)
+        // S.C: O(1)
 
         int n = image.size();
 
