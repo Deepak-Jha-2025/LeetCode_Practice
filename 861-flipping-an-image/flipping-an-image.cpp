@@ -3,23 +3,27 @@ public:
     void reverse(vector<int>& v) {
         int n = v.size();
 
-        // // 2 ptrs
-        // int l = 0, r = n-1;
+        // 2 ptrs
+        int l = 0, r = n-1;
 
-        // while(l < r) {
-        //     swap(v[l], v[r]);
-        //     l++, r--;
-        // }
-
-        // 1 ptr or idx
-        for(int i=0; i<n/2; i++) {
-            swap(v[i], v[(n-1)-i]);
+        while(l <= r) {
+            int temp = v[l];
+            v[l] = v[r] ^ 1;
+            v[r] = temp ^ 1;
+            l++, r--;
         }
+
+        // // 1 ptr or idx
+        // for(int i=0; i<=n/2; i++) {
+        //     int temp = v[i];
+        //     v[i] = v[n-1-i] ^ 1; // to flip a bit, xor it with 1 (0 ^ 1 = 1 && 1 ^ 1 = 0)
+        //     v[n-1-i] = temp ^ 1;
+        // }
     }
 
     vector<vector<int>> flipAndInvertImage(vector<vector<int>>& image) {
-        // Brute force
-        // T.C: O(n * n/2) + O(n^2)
+        // Improved Brute 
+        // T.C: O(n * n/2)
         // S.C: O(1)
 
         int n = image.size();
@@ -27,12 +31,6 @@ public:
         // O(n * n/2)
         for(int i=0; i<n; i++) {
             reverse(image[i]);
-        }
-
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                image[i][j] = !image[i][j];
-            }
         }
 
         return image;
