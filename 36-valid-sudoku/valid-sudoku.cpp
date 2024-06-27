@@ -17,6 +17,8 @@ public:
     }
 
     bool isValidSudoku(vector<vector<char>>& board) {
+        // So, far this is the optimal solution
+
         // Improved Brute/Better --> using bitmask or set data structure
         // T.C: O(2*n^2) + O(2*(n/3)^2) ==> O(n^2)
         // S.C: O(n) + O(n) + O((n/3)^2) => O(n^2)
