@@ -18,8 +18,8 @@ public:
 
     bool isValidSudoku(vector<vector<char>>& board) {
         // Improved Brute/Better --> using bitmask or set data structure
-        // T.C: O(2*n^2) + O(2*(n/3)^2)
-        // S.C: O(n) + O(n) + O((n/3)^2)
+        // T.C: O(2*n^2) + O(2*(n/3)^2) ==> O(n^2)
+        // S.C: O(n) + O(n) + O((n/3)^2) => O(n^2)
 
         // n = 9
         int n = board.size();
@@ -69,6 +69,9 @@ public:
             
                 int left = 3*j;
                 int right = (n/3)*(j+1) - 1;
+
+                // Any grid/sub-box has 4 sides, so it needs 4 ptrs (just like subarr needs 2 ptrs)
+                // So, a sub-box is defined b/w top and bottom, left and right
 
                 if(checkSubBox(board, top, bottom, left, right) == false) {
                     return false; // grid is invalid so sudoku is invalid
