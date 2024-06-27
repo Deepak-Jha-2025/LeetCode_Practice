@@ -39,7 +39,7 @@ public:
             i++;
         }
 
-        while(i < m) {
+        while(j < m) {
 
             // from the next floor below, start looking for the next floor with non-zero no. of devices, this
             // will be the lower floor
