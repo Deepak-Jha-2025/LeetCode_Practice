@@ -1,7 +1,10 @@
 class Solution {
 public:
     bool checkValid(vector<vector<int>>& matrix) {
-        // Brute force - using bitmask array
+        // Better Sol/Optimized Brute - using set data structure
+
+        // This is the optimal solution b/z xor optimization fails for this ques
+
         // T.C: O(n*2n) + O(n*2n)
         // S.C: O(n)
 
