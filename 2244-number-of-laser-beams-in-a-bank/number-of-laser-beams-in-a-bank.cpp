@@ -39,6 +39,7 @@ public:
             i++;
         }
 
+        // Always put 2 pointer boundation to ensure double safety
         while(i < m && j < m) {
 
             // from the next floor below, start looking for the next floor with non-zero no. of devices, this
