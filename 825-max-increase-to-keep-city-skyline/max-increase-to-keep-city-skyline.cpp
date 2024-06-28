@@ -10,8 +10,8 @@ public:
 
     int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
         // Brute Force (same as editorial approach)
-        // T.C:
-        // S.C:
+        // T.C: O(3n^2)
+        // S.C: O(2n)
 
         // Step 1: find max element of each row and column as these max height
         // buildings are the ones deciding the skyline, 
@@ -26,12 +26,12 @@ public:
         vector<int> rowSkyline(n, 0);
         vector<int> colSkyline(n, 0);
 
-        // find max along rows
-        for(int i=0; i<n; i++) {
+        // find max along rows => O(n^2)
+        for(int i=0; i<n; i++) { 
             rowSkyline[i] = findMaxElement(grid[i]);
         }
 
-        // find max along cols
+        // find max along cols => O(n^2)
         for(int j=0; j<n; j++) {
             
             int maxi = grid[0][j];
