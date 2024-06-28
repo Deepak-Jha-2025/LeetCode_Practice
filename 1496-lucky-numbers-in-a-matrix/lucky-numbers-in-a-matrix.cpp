@@ -1,77 +1,63 @@
 class Solution {
 public:
-    int findRowMin(vector<vector<int>>& matrix, int row) {
+    int findRowMin(vector<vector<int>>& matrix, int& minVal, int row) {
         
+        minVal = matrix[row][0];
         int n = matrix[row].size();
-        int mini = matrix[row][0];
-        
+
+        int minCol_idx = 0;
         for(int j=1; j<n; j++) {
-            mini = min(mini, matrix[row][j]);
+            if(matrix[row][j] < minVal) {
+                minVal = matrix[row][j];
+                minCol_idx = j;
+            }
         }
-        return mini;
+
+        return minCol_idx;
     }
 
     int findColMax(vector<vector<int>>& matrix, int col) {
 
+        int maxVal = matrix[0][col];
         int m = matrix.size();
-        int maxi = matrix[0][col];
 
         for(int i=1; i<m; i++) {
-            maxi = max(maxi, matrix[i][col]);
+            maxVal = max(maxVal, matrix[i][col]);
         }
-        return maxi;
+
+        return maxVal;
     }
 
     vector<int> luckyNumbers (vector<vector<int>>& matrix) {
-        // Brute force (simply check for every element, whether it
-        // satisfies the given min-max constraints, by everytime 
-        // finding the min and max of each row and col)) ==> T.C: O((m*n)^2)
+        // Optimal solution (in-place)
 
-        // Better Solution (using sets to keep track of min for each row and max for each col)
-        // T.C: O(2mn) + O(min(m, n))
-        // S.C: O(m+n)
+        // Intuition: Only check for those numbers which validate the 1st criteria, i.e. min in their row
+        // b/z only those potentially may/may not be lucky numbers (provided they validate the 2nd criteria
+        // also, that they are the max in their col as well)
+
+        // T.C: O(m*(n+m))
+        // S.C: O(1)
 
         int m = matrix.size();
         int n = matrix[0].size();
-
-        unordered_set<int> row_minValues; // to store the minimum val of each row 
-        unordered_set<int> col_maxValues; // to store the maximum val of each col 
-
-        // Row minimums O(m*n)
-        for(int i=0; i<m; i++) {
-            row_minValues.insert(findRowMin(matrix, i));
-        }
-
-        // Col maximums O(m*n)
-        for(int j=0; j<n; j++) {
-            col_maxValues.insert(findColMax(matrix, j));
-        }
-
-        // Now that we are using sets, so no need to iterate in matrix again (O(m*n)) 
-        // or no need to linear search every value of one array in the other (O(m*n))
-
-        // As unordered_set takes O(1) time in avg and best case to search, so using .find() 
-        // function in any of the 2 sets (either the size m set or the size n set) would take
-        // O(m) or O(n) time
-
-        // Find lucky no.s (should be present in both the sets)
         vector<int> luckyNums;
+        for(int i=0; i<m; i++) {  // O(m*(n+m))
 
-        // Either iterate in col_maxValues and find it's elements in row_minValues => O(n) * O(1)
-        for(auto it : col_maxValues) {
-            if(row_minValues.find(it) != row_minValues.end()) {
-                luckyNums.push_back(it);
+            // 1st find min val in row
+            int minVal = 0;
+            int minCol_idx = findRowMin(matrix, minVal, i); // O(n)
+
+            // now, in whatever col idx is that row min value, check if that same min val is
+            // the max val in that col as well, if yes, it is lucky, else discard the entire row
+            // (b/z rest of the no.s of the row aren't even potential candidates to be lucky no.s
+            //  as they failed the 1st criteria itself, so no use checking the 2nd for them)
+
+            int maxVal = findColMax(matrix, minCol_idx); // o(m)
+            if(minVal == maxVal) {
+                luckyNums.push_back(minVal);
+                // luckyNums.push_back(maxVal);
             }
         }
-
-        // Iterate on the smaller set (m < n or n < m) to save time
-
-        // // Or iterate in row_minValues and find it's elements in col_maxValues => O(m) * O(1)
-        // for(auto it : row_minValues) {
-        //     if(col_maxValues.find(it) != col_maxValues.end()) {
-        //         luckyNums.push_back(it);
-        //     }
-        // }
 
         return luckyNums;
     }
