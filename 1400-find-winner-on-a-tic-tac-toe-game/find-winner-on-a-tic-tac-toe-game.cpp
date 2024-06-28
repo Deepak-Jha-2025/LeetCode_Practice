@@ -47,6 +47,8 @@ public:
 
     string tictactoe(vector<vector<int>>& moves) {
         // Simple implementation based (only 1 solution => optimal)
+        // T.C: O(2*n) + O(2m^2) + O(2*m), since m = 3, which is comparable to n <= 9
+        // S.C: O(m^2), to evaluate the result, m = 3
 
         int n = moves.size();
 
