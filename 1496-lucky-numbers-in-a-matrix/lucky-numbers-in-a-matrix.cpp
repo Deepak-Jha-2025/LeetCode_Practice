@@ -28,7 +28,7 @@ public:
         // finding the min and max of each row and col)) ==> T.C: O((m*n)^2)
 
         // Better Solution (using sets to keep track of min for each row and max for each col)
-        // T.C: O(3mn)
+        // T.C: O(2mn) + O(min(m, n))
         // S.C: O(m+n)
 
         int m = matrix.size();
@@ -57,19 +57,21 @@ public:
         // Find lucky no.s (should be present in both the sets)
         vector<int> luckyNums;
 
-        // // Either iterate in row_minValues and find it's elements in col_maxValues
-        // for(auto it : row_minValues) {
-        //     if(col_maxValues.find(it) != col_maxValues.end()) {
-        //         luckyNums.push_back(it);
-        //     }
-        // }
-
-        // Or iterate in col_maxValues and find it's elements in row_minValues
+        // Either iterate in col_maxValues and find it's elements in row_minValues => O(n) * O(1)
         for(auto it : col_maxValues) {
             if(row_minValues.find(it) != row_minValues.end()) {
                 luckyNums.push_back(it);
             }
         }
+
+        // Iterate on the smaller set (m < n or n < m) to save time
+
+        // // Or iterate in row_minValues and find it's elements in col_maxValues => O(m) * O(1)
+        // for(auto it : row_minValues) {
+        //     if(col_maxValues.find(it) != col_maxValues.end()) {
+        //         luckyNums.push_back(it);
+        //     }
+        // }
 
         return luckyNums;
     }
