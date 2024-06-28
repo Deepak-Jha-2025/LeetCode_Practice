@@ -56,8 +56,7 @@ public:
 
         // Find lucky no.s (should be present in both the sets)
         vector<int> luckyNums;
-        unordered_set<int>::iterator it;
-        for(it = row_minValues.begin(); it != row_minValues.end(); it++) {
+        for(auto it = row_minValues.begin(); it != row_minValues.end(); it++) {
             if(col_maxValues.find(*it) != col_maxValues.end()) {
                 luckyNums.push_back(*it);
             }
