@@ -56,8 +56,17 @@ public:
 
         // Find lucky no.s (should be present in both the sets)
         vector<int> luckyNums;
-        for(auto it : row_minValues) {
-            if(col_maxValues.find(it) != col_maxValues.end()) {
+
+        // // Either iterate in row_minValues and find it's elements in col_maxValues
+        // for(auto it : row_minValues) {
+        //     if(col_maxValues.find(it) != col_maxValues.end()) {
+        //         luckyNums.push_back(it);
+        //     }
+        // }
+
+        // Or iterate in col_maxValues and find it's elements in row_minValues
+        for(auto it : col_maxValues) {
+            if(row_minValues.find(it) != row_minValues.end()) {
                 luckyNums.push_back(it);
             }
         }
