@@ -1,32 +1,57 @@
 class Solution {
 public:
+    int countInRows(vector<vector<int>>& mat, int row) {
+
+        int n = mat[row].size();
+        int onesCnt = 0;
+        int colIdx = 0;
+
+        for(int j=0; j<n; j++) {
+            if(mat[row][j] == 1) {
+                colIdx = j;
+                onesCnt++;
+            }
+        }
+
+        if(onesCnt == 1) {
+            return colIdx;
+        }
+
+        return -1;
+    }
+
+    int countInCols(vector<vector<int>>& mat, int col) {
+
+        int m = mat.size();
+        int onesCnt = 0;
+
+        for(int i=0; i<m; i++) {
+            if(mat[i][col] == 1) {
+                onesCnt++;
+            }
+        }
+
+        return onesCnt;
+    }
+
     int numSpecial(vector<vector<int>>& mat) {
-        // Better solution (Editorial Approach 2)
-        // T.C: O(2mn)
-        // T.C: O(m+n)
+        // Optimal solution (just like the optimal for lucky numbers problem)
+
+        // T.C: O(m*(n + m)) 
+        // S.c: O(1)
 
         int m = mat.size();
         int n = mat[0].size();
 
-        vector<int> rowOnesCount(m, 0);
-        vector<int> colOnesCount(n, 0);
-
-        // pre-compute the freq of 1s in each row and col simultaneously (O(mn))
-        for(int i=0; i<m; i++) {
-            for(int j=0; j<n; j++) {
-                if(mat[i][j] == 1) {
-                    // Counting can be done simultaneously
-                    rowOnesCount[i]++;
-                    colOnesCount[j]++;
-                }
-            }
-        }
-
-        // Now, just count the special pos (i,j) satisfying all 3 conditions
         int specialPos = 0;
-        for(int i=0; i<m; i++) {
-            for(int j=0; j<n; j++) {
-                if(mat[i][j] == 1 && rowOnesCount[i] == 1 && colOnesCount[j] == 1) {
+        for(int i=0; i<m; i++) { // O(m*(n + m))
+            
+            int colIdx = countInRows(mat, i); // O(n) for each row
+            if(colIdx >= 0) {
+                // there exists a row with a single 1s in it
+                // so (i, j) can be potentially a special pos, provided j satisfies the rule too
+
+                if(countInCols(mat, colIdx) == 1) { // O(m) for each col
                     specialPos++;
                 }
             }
