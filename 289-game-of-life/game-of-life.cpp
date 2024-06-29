@@ -1,93 +1,79 @@
 class Solution {
 public:
+    int countLiveNeighbors(vector<vector<int>>& board, int row, int col) {
+        int m = board.size();
+        int n = board[0].size();
+
+        int neighbors = 0;
+        for(int i=row-1; i<=row+1; i++) {
+            for(int j=col-1; j<=col+1; j++) {
+
+                if((i==row && j==col) || i<0 || j<0 || i==m || j==n) {
+                    continue;
+                }
+
+                if(board[i][j] == 1 || board[i][j] == 3) {
+                    neighbors++;
+                }
+            }
+        }
+
+        return neighbors;
+    }
+
     void gameOfLife(vector<vector<int>>& board) {
-        // Brute force
-        // T.C: O(m*n) + O(m*n)
-        // S.C: O(m*n)
+        // Better solution (Optimal Solution)
+
+        // Similar approach to brute force of "set matrix zeros" ques
+        /* Original   |   New   |   State(modified temporarily)
+              0       |    0    |     0
+              1       |    0    |     1
+              0       |    1    |     2
+              1       |    1    |     3
+        */
+
+        // T.C: O(2mn)
+        // S.C: O(1)
 
         int m = board.size();
         int n = board[0].size();
 
-        int cnt = 0;
-        vector<vector<int>> ans(m, vector<int>(n));
-
-        // O(m*n)
         for(int i=0; i<m; i++) {
             for(int j=0; j<n; j++) {
-                
-                bool leftCheck = false, rightCheck = false;
-                cnt = 0; // reset count for each element
-                if(i-1>=0) {
-                    if(board[i-1][j] == 1) {
-                        cnt++;
-                    }
 
-                    if(j-1>=0) {
-                        if(board[i][j-1] == 1) {
-                            cnt++;
-                            leftCheck = true;
-                        }
-                        if(board[i-1][j-1] == 1) {
-                            cnt++;
-                        }
-                    }
-
-                    if(j+1<n) {
-                        if(board[i][j+1] == 1) {
-                            cnt++;
-                            rightCheck = true;
-                        }
-                        if(board[i-1][j+1] == 1) {
-                            cnt++;
-                        }
-                    }
-                }
-
-                if(i+1<m) {
-                    if(board[i+1][j] == 1) {
-                        cnt++;
-                    }
-
-                    if(j-1>=0) {
-                        if(board[i][j-1] == 1 && leftCheck == false) {
-                            cnt++;
-                        }
-                        if(board[i+1][j-1] == 1) {
-                            cnt++;
-                        }
-                    }
-
-                    if(j+1<n) {
-                        if(board[i][j+1] == 1 && rightCheck == false) {
-                            cnt++;
-                        }
-                        if(board[i+1][j+1] == 1) {
-                            cnt++;
-                        }
-                    }
-                }
-
-                if(board[i][j] == 0) {
-                    if(cnt == 3) {
-                        ans[i][j] = 1;
-                    }
-                    else {
-                        ans[i][j] = 0;
-                    }
-                }
+                int neighbors = countLiveNeighbors(board, i, j);
 
                 if(board[i][j] == 1) {
-                    if(cnt < 2 || cnt > 3) {
-                        ans[i][j] = 0;
-                    }
-                    else if(cnt == 2 || cnt == 3) {
-                        ans[i][j] = 1;
+                    
+                    if(neighbors == 2 || neighbors == 3) {
+                        // It lives, 1 --> 1, so temporarily change it to 3
+                        // else if it dies, 1 --> 0, its temp state is also 1, so just leave it
+                        board[i][j] = 3;
                     }
                 }
-
+                else {
+                    if(neighbors == 3) {
+                        // it becomes live, 0 --> 1, so temporarily change it to 2
+                        // else if it stays dead, 0 --> 0, its temp state is also 0, so just leave it
+                        board[i][j] = 2;
+                    }
+                }
             }
         }
 
-        board = ans; // O(m*n) --> only b/z of the return type of the function
+        // Now, convert the temp o/p state to the actual new state
+        for(int i=0; i<m; i++) {
+            for(int j=0; j<n; j++) {
+                
+                if(board[i][j] == 1) {
+                    board[i][j] = 0;
+                }
+
+                if(board[i][j] == 2 || board[i][j] == 3) {
+                    board[i][j] = 1;
+                }
+            }
+        }
+
     }
 };
