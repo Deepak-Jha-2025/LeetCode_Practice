@@ -13,9 +13,9 @@ public:
 
         // rowIndex -> 0-based
         // n        -> 1-based
-        for(int col = 1; col < n; col++) {
-            ans = ans * (n - col);
-            ans = ans / col;
+        for(int col = 2; col <= n; col++) {
+            ans = ans * (n - (col - 1));
+            ans = ans / (col-1);
             row.push_back(ans);
         }
 
