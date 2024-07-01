@@ -1,29 +1,25 @@
 class Solution {
 public:
-    long long nCr(int n, int r) {
-        long long res = 1;
-        for(long long i=0; i<r; i++) {
-            res = res * (n-i);
-            res = res / (i+1);
-        }
-        return res;
-    }
-
     vector<int> getRow(int rowIndex) {
-        // Brute Force
-        // T.C: O(n * r) , n = rowIdx + 1, r = colIdx
-        // S.C: O(1)
+        // Better Solution
+        // T.C:
+        // S.C:
 
-        // No. of elements in a row = rowIndex(0-based) + 1
         int n = rowIndex + 1;
         vector<int> row;
 
-        for(int colIndex=0; colIndex < n; colIndex++) 
-        {
-            // row[colIndex] = nCr(rowIndex, colIndex);
-            row.push_back(nCr(rowIndex, colIndex));
+        long long ans = 1;
+        row.push_back(ans); // for 0th col
+
+        // rowIndex -> 0-based
+        // n        -> 1-based
+        for(int col = 1; col < n; col++) {
+            ans = ans * (n - col);
+            ans = ans / col;
+            row.push_back(ans);
         }
 
         return row;
+
     }
 };
